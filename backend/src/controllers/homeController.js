@@ -20,9 +20,7 @@ const deleteUser = async (req, res) => {
 }
 const getUserInfoById = async (req, res) => {
     let user = await userService.readUserById(req.params.id)
-    let userData = {}
-    if (user?.length > 0) userData = user[0]
-    return res.render("user-update.ejs", { userData })
+    return res.render("user-update.ejs", { user })
 }
 const updateUser = async (req, res) => {
     let id = req.body.id

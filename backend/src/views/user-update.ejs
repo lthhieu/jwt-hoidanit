@@ -17,15 +17,15 @@
         <h1>Update User</h1>
         <div class="row">
             <form method="post" action="/users/update">
-                <input hidden name="id" value="<%=userData.id%>" />
+                <input hidden name="id" value="<%=user.id%>" />
                 <div class="mb-3 col-6">
                     <label class="form-label">Username</label>
-                    <input value="<%=userData.username%>" required type="text" class="form-control" name="username">
+                    <input value="<%=user.username%>" required type="text" class="form-control" name="username">
                 </div>
                 <div class="col-6"></div>
                 <div class="mb-3 col-6">
                     <label class="form-label">Email address</label>
-                    <input value="<%=userData.email%>" required type="email" class="form-control" name="email">
+                    <input value="<%=user.email%>" required type="email" class="form-control" name="email">
                 </div>
                 <div class="col-6"></div>
                 <div class="col-12">
