@@ -8,6 +8,22 @@ const createUser = async (username, email, password) => {
     await db.User.create({ username, email, password: hash });
 }
 const readUser = async () => {
+    //test relationship
+    let newUser = await db.User.findOne({
+        where: { id: 1 },
+        attributes: ["id", "email"],
+        include: { model: db.Group, attributes: ["name", "description"] },
+        raw: true,
+        nest: true
+    })
+    let role = await db.Group.findAll({
+        where: { id: 1 },
+        include: db.Role,
+        raw: true,
+        nest: true
+    })
+    console.log(newUser)
+    console.log(role)
     const users = await db.User.findAll()
     return users
 }
