@@ -1,0 +1,21 @@
+.register-container {
+    background-color: #f0f2f5;
+
+    .content-left {
+        margin-top: 1.5rem;
+    }
+
+    .content-right {
+        .register-box {
+            border-radius: 1rem;
+
+            .forgotten-password {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

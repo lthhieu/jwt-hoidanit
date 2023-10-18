@@ -1,5 +1,6 @@
 import React from 'react';
-import './Login.scss'
+import './Login.scss';
+import { Link } from "react-router-dom";
 const Login = () => {
     return (
         <div className='login-container min-vh-100 p-3'>
@@ -14,13 +15,12 @@ const Login = () => {
                             <div className='text-primary text-center h1 d-block d-md-none'>JWT</div>
                             <input placeholder='Email address' className='mt-2 form-control' type='text' />
                             <input placeholder='Password' className='form-control' type='password' />
-                            <button className='btn btn-primary fs-4 fw-bold'>Log In</button>
+                            <button className='btn btn-primary fs-6 fw-bold'>Log In</button>
                             <span className='forgotten-password text-center text-primary'>Forgotten password?</span>
                             <hr />
                             <div className='text-center'>
-                                <button className='btn btn-success fw-bold'>Create new account</button>
+                                <Link to="/register"><button className='btn btn-success fw-bold'>Create new account</button></Link>
                             </div>
-
                         </div>
                     </div>
                 </div>
