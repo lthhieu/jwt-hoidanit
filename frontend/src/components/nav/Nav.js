@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Nav.scss'
 import { NavLink } from "react-router-dom"
 const Nav = () => {
+    const [show, setShow] = useState(false)
+    useEffect(() => {
+        let session = sessionStorage.getItem("account");
+        if (session) {
+            setShow(true)
+        }
+    }, [])
     return (
-        <div className="topnav">
-            <NavLink to="/" exact>Home</NavLink>
-            <NavLink to="/news">News</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-            <NavLink to="/about">About</NavLink>
-        </div>
+        <>{show && <div className="topnav">
+            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/project">Project</NavLink>
+        </div>}
+        </>
     );
 };
 
