@@ -49,6 +49,7 @@ const NavHeader = () => {
                             <Nav className="me-auto">
                                 <NavLink className="nav-link" to="/" exact>Home</NavLink>
                                 <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
+                                <NavLink className="nav-link" to="/role">Role</NavLink>
                                 <NavLink className="nav-link" to="/project">Project</NavLink>
 
                             </Nav>
@@ -61,8 +62,6 @@ const NavHeader = () => {
                                             <span onClick={() => { handleLogout() }}>Log Out</span>
                                         </NavDropdown.Item>
                                     </NavDropdown></> : <><Link className="nav-link" to='/login'>Login</Link></>}
-
-
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

@@ -86,10 +86,10 @@ const createNewUser = async (data) => {
         let hash = await hashPassword(password)
         //create new user
         await db.User.create({ email, username, password: hash, phone, address, sex, groupId });
-        return { em: "Create user successfully", ec: "0" }
+        return { em: "Create user successfully", ec: "0", dt: '' }
     } catch (e) {
         console.log(e)
-        return { em: "Error from service", ec: "-2" }
+        return { em: "Error from service", ec: "-2", dt: '' }
     }
 }
 const deleteUser = async (id) => {

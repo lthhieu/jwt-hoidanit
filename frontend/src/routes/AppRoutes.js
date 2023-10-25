@@ -8,6 +8,7 @@ import {
     Route
 } from "react-router-dom"
 import PrivateRoutes from './PrivateRoutes';
+import Role from '../components/role/Role';
 const AppRoutes = () => {
     const Project = () => {
         return (<>project</>)
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <div>
             <Switch>
                 <PrivateRoutes path="/dashboard" component={Dashboard} />
+                <PrivateRoutes path="/role" component={Role} />
                 <PrivateRoutes path="/project" component={Project} />
 
                 <Route path="/login">

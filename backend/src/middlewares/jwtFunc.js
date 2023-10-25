@@ -64,7 +64,7 @@ const checkUserPermission = (req, res, next) => {
         if (!roles || roles.length === 0) {
             return res.status(403).json({
                 ec: '-1',
-                em: 'Dont have permission',
+                em: 'Dont have any roles',
                 dt: ''
             })
         }

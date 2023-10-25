@@ -23,7 +23,6 @@ instance.interceptors.response.use(function (response) {
     }
     //no permission  - forbidden
     case 403: {
-      toast.error('No permission')
       return error?.response?.data
     }
     case 400: {

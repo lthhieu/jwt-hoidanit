@@ -90,13 +90,14 @@ const createFunc = async (req, res) => {
     }
 }
 const getUserAccount = async (req, res) => {
+    console.log(req?.user, req?.token)
     return res.status(200).json({
         em: "ok",
         ec: "0",
         dt: {
-            role: req.user.role,
-            account: { email: req.user.email, username: req.user.username },
-            access_token: req.token
+            role: req.user?.role,
+            account: { email: req.user?.email, username: req.user?.username },
+            access_token: req?.token
         }
     })
 }
