@@ -31,7 +31,21 @@ const createFunc = async (req, res) => {
 }
 const deleteFunc = async (req, res) => {
     try {
-
+        let { id } = req?.body
+        if (id) {
+            let result = await roleService.deleteRole(id)
+            return res.status(200).json({
+                em: result.em,
+                ec: result.ec,
+                dt: result.dt
+            })
+        } else {
+            return res.status(200).json({
+                em: "No any ID",
+                ec: "1",
+                dt: ""
+            })
+        }
 
     } catch (e) {
         console.log(e)
@@ -44,7 +58,22 @@ const deleteFunc = async (req, res) => {
 }
 const readFunc = async (req, res) => {
     try {
-
+        if (req?.query?.page && req?.query?.limit) {
+            let { page, limit } = req?.query
+            let result = await roleService.getRolesWithPagination(+page, +limit)
+            return res.status(200).json({
+                em: result.em,
+                ec: result.ec,
+                dt: result.dt
+            })
+        } else {
+            let result = await roleService.getAllRoles()
+            return res.status(200).json({
+                em: result.em,
+                ec: result.ec,
+                dt: result.dt
+            })
+        }
 
     } catch (e) {
         console.log(e)

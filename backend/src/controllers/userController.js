@@ -90,7 +90,6 @@ const createFunc = async (req, res) => {
     }
 }
 const getUserAccount = async (req, res) => {
-    console.log(req?.user, req?.token)
     return res.status(200).json({
         em: "ok",
         ec: "0",

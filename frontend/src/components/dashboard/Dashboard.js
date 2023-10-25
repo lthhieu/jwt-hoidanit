@@ -94,9 +94,9 @@ const Dashboard = () => {
                                         <td>{item.email}</td>
                                         <td>{item.username}</td>
                                         <td>{item?.Group?.name}</td>
-                                        <td className='d-flex gap-2'>
-                                            <button className='btn btn-warning'>Edit</button>
-                                            <button onClick={() => handleDeleteUser(item.id)} className='btn btn-danger'>Delete</button>
+                                        <td className='d-flex gap-4'>
+                                            <i role='button' className="fa fa-pencil fa-2x text-warning" aria-hidden="true"></i>
+                                            <i onClick={() => handleDeleteUser(item.id)} role='button' className="fa fa-eraser fa-2x text-danger" aria-hidden="true"></i>
                                         </td>
                                     </tr>)
                                 })}
