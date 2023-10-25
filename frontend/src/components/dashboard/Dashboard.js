@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { fetchUsers, deleteUser } from '../../services/userService'
 import ReactPaginate from 'react-paginate';
 import Swal from 'sweetalert2'
@@ -19,6 +19,7 @@ const Dashboard = () => {
     const handleShow = () => setShow(true);
     useEffect(() => {
         fetchAllUsers()
+
     }, [page, limit])
     const fetchAllUsers = async () => {
         let response = await fetchUsers(page, limit)
@@ -58,7 +59,7 @@ const Dashboard = () => {
         <div className='dashboard-container'>
             <div className='container'>
                 <ModalUser title="Create user" show={show} handleClose={handleClose} fetchAllUsers={fetchAllUsers} />
-                <div className='dashboard-header'>
+                <div className='dashboard-header my-3'>
                     <div className='title'><h3>Users List</h3></div>
                     <div className='actions d-flex flex-md-row flex-column gap-2'>
                         <div><button className='btn btn-success'>Refresh</button></div>

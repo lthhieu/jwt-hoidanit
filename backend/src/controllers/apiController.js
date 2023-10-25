@@ -16,7 +16,7 @@ const handleRegister = async (req, res) => {
                 dt: ""
             })
         }
-        let result = await apiService.Register({ email, username, password, phone, address, sex, groupId: req?.body?.groupId })
+        let result = await apiService.Register({ email, username, password, phone, address, sex, groupId: req?.body?.groupId || 4 })
         return res.status(200).json({
             em: result.em,
             ec: result.ec,
@@ -32,15 +32,18 @@ const handleRegister = async (req, res) => {
 
 }
 const handleLogin = async (req, res) => {
-
     try {
         let result = await apiService.Login(req.body)
+        //set cookie
+        if (result?.dt?.access_token)
+            res.cookie("access_token", result?.dt?.access_token, { httpOnly: true })
         return res.status(200).json({
             em: result.em,
             ec: result.ec,
             dt: result.dt
         })
     } catch (e) {
+        console.log(e)
         return res.status(500).json({
             em: "Error from server",
             ec: "-1",
@@ -48,4 +51,22 @@ const handleLogin = async (req, res) => {
         })
     }
 }
-module.exports = { test, handleRegister, handleLogin }
+const handleLogout = (req, res) => {
+    try {
+        //clear cookie
+        res.clearCookie("access_token")
+        return res.status(200).json({
+            em: 'clear cookies',
+            ec: '0',
+            dt: ''
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            em: "Error from server",
+            ec: "-1",
+            dt: ""
+        })
+    }
+}
+module.exports = { test, handleRegister, handleLogin, handleLogout }

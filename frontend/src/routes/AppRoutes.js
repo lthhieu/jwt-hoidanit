@@ -2,6 +2,7 @@ import React from 'react';
 import Login from "../components/login/Login";
 import Register from "../components/register/Register";
 import Dashboard from "../components/dashboard/Dashboard";
+import Home from '../components/home/Home';
 import {
     Switch,
     Route
@@ -14,12 +15,6 @@ const AppRoutes = () => {
     return (
         <div>
             <Switch>
-                {/* <Route path="/dashboard">
-                    <Dashboard />
-                </Route>
-                <Route path="/project">
-                    project
-                </Route> */}
                 <PrivateRoutes path="/dashboard" component={Dashboard} />
                 <PrivateRoutes path="/project" component={Project} />
 
@@ -30,7 +25,7 @@ const AppRoutes = () => {
                     <Register />
                 </Route>
                 <Route path="/" exact>
-                    home
+                    <Home />
                 </Route>
                 <Route path="*">
                     404 not found

@@ -1,28 +1,34 @@
-import Nav from "./components/nav/Nav";
+import NavHeader from "./components/nav/NavHeader";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
   BrowserRouter as Router
 } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import AppRoutes from "./routes/AppRoutes";
+import { UserContext } from "./context/UserContext";
+import { BallTriangle } from 'react-loader-spinner'
 function App() {
-  const [account, setAccount] = useState({})
-  useEffect(() => {
-    let session = sessionStorage.getItem("account");
-    if (session) {
-      setAccount(JSON.parse(session))
-    }
-  }, [])
+  const { user } = useContext(UserContext)
   return (
     <>
       <Router>
-        <div className="app=header">
-          <Nav />
+        {user?.loading ? <div className=" d-flex align-items-center justify-content-center min-vh-100" ><BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#1877f2"
+          ariaLabel="ball-triangle-loading"
+          wrapperClass={{}}
+          wrapperStyle=""
+          visible={true}
+        /></div> : <><div className="app-header">
+          <NavHeader />
         </div>
-        <div className="app-container">
-          <AppRoutes />
-        </div>
+          <div className="app-container">
+            <AppRoutes />
+          </div></>}
+
       </Router>
       <ToastContainer />
     </>

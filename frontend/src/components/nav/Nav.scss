@@ -22,3 +22,52 @@
         color: white;
     }
 }
+
+.custom-nav {
+
+    @media (prefers-reduced-motion: no-preference) {
+        .navbar-brand {
+            img {
+                animation: App-logo-spin infinite 10s linear;
+            }
+        }
+    }
+
+    @keyframes App-logo-spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .bg-custom-nav {
+        background-color: #f4f6f9;
+    }
+
+    a {
+        color: #212529 !important;
+
+        &:hover {
+            color: #0dacd8 !important;
+        }
+    }
+
+    .custom-text {
+        color: #0dacd8;
+    }
+
+    .nav-link {
+        &.active {
+            color: #0dacd8 !important;
+        }
+    }
+
+    .dropdown-menu {
+        a {
+            color: #212529 !important;
+        }
+    }
+}

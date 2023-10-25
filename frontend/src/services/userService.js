@@ -5,10 +5,16 @@ const register = (data) => {
 const login = (data) => {
     return axios.post("/login", data)
 }
+const logOut = () => {
+    return axios.post("/logout")
+}
 const fetchUsers = (page, limit) => {
     return axios.get(`/user/read?page=${page}&limit=${limit}`)
 }
 const deleteUser = (id) => {
     return axios.delete('/user/delete', { data: { id } })
 }
-export { register, login, fetchUsers, deleteUser }
+const getUserAccount = () => {
+    return axios.get('/account')
+}
+export { register, login, fetchUsers, deleteUser, getUserAccount, logOut }

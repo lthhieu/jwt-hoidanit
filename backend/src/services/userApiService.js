@@ -79,14 +79,17 @@ const updateUser = async (data) => {
 }
 const createNewUser = async (data) => {
     try {
-        await db.User.create({})
+        let { email, username, password, phone, address, sex, groupId } = data
+        //check existed email or phone
+        if (await checkExistedEmailOrPhone(email, phone)) return { em: "Email or phone is existed", ec: "1" }
+        //hash password
+        let hash = await hashPassword(password)
+        //create new user
+        await db.User.create({ email, username, password: hash, phone, address, sex, groupId });
+        return { em: "Create user successfully", ec: "0" }
     } catch (e) {
         console.log(e)
-        return {
-            em: "fail",
-            ec: "1",
-            dt: []
-        }
+        return { em: "Error from service", ec: "-2" }
     }
 }
 const deleteUser = async (id) => {

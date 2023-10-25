@@ -1,6 +1,8 @@
 import db from '../db/models'
 const { Op } = require("sequelize")
 import bcrypt from 'bcrypt'
+import { getGroupWithRoles } from './JwtService'
+import { createJwt } from '../middlewares/jwtFunc'
 const saltRounds = 10
 const hashPassword = async (password) => await bcrypt.hash(password, saltRounds)
 const comparePassword = async (password, hashPassword) => await bcrypt.compare(password, hashPassword)
@@ -47,7 +49,14 @@ const Login = async (data) => {
         if (user) {
             //check password
             if (await comparePassword(password, user.password)) {
-                return { em: "successfully", ec: "0" }
+                let role = await getGroupWithRoles(user)
+                let token = createJwt({ email: user.email, role, username: user.username })
+
+                return {
+                    em: "successfully", ec: "0", dt: {
+                        access_token: token, role, account: { email: user.email, username: user.username }
+                    }
+                }
             } else return { em: "Password is not correct", ec: "1" }
         } else {
             return { em: "Email or phone is not correct", ec: "1" }

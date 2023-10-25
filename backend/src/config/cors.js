@@ -5,7 +5,8 @@ const configCors = (app) => {
         origin: process.env.REACT_URL,
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         preflightContinue: false,
-        optionsSuccessStatus: 200
+        optionsSuccessStatus: 200,
+        credentials: true
     }))
 }
 export default configCors

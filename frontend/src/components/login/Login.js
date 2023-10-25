@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Login.scss';
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { login } from '../../services/userService';
 import { useHistory } from "react-router-dom";
+import { UserContext } from '../../context/UserContext';
 const Login = () => {
+    const { loginContext, user } = useContext(UserContext)
     let history = useHistory();
     const [valueLogin, setValueLogin] = useState("")
     const [password, setPassword] = useState("")
@@ -29,13 +31,12 @@ const Login = () => {
         let response = await login(userData)
         if (response) {
             if (+response?.ec === 0) {
-                let data = {
-                    isAuth: true,
-                    token: 'fake'
-                }
-                sessionStorage.setItem("account", JSON.stringify(data));
+                let roles = response?.dt?.role
+                let data = { account: { ...response?.dt?.account, roles }, auth: true, token: response?.dt?.access_token }
+                localStorage.setItem('access_token', response?.dt?.access_token)
+                loginContext(data)
                 history.push("/dashboard")
-                window.location.reload()
+                // window.location.reload()
             }
             else toast.error(response?.em)
         }
@@ -46,8 +47,7 @@ const Login = () => {
         }
     }
     useEffect(() => {
-        let session = sessionStorage.getItem("account");
-        if (session) {
+        if (user?.auth) {
             history.push("/dashboard")
         }
     }, [])

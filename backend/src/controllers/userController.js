@@ -65,4 +65,39 @@ const deleteFunc = async (req, res) => {
         })
     }
 }
-module.exports = { readFunc, updateFunc, deleteFunc }
+const createFunc = async (req, res) => {
+    try {
+        let { email, username, password, phone, address, sex } = req.body
+        if (!(email && username && password && phone && address)) {
+            return res.status(200).json({
+                em: "Missing required params",
+                ec: "1",
+                dt: ""
+            })
+        }
+        let result = await userApiService.createNewUser({ email, username, password, phone, address, sex, groupId: req?.body?.groupId || 4 })
+        return res.status(200).json({
+            em: result.em,
+            ec: result.ec,
+            dt: ""
+        })
+    } catch (e) {
+        return res.status(500).json({
+            em: "Error from server",
+            ec: "-1",
+            dt: ""
+        })
+    }
+}
+const getUserAccount = async (req, res) => {
+    return res.status(200).json({
+        em: "ok",
+        ec: "0",
+        dt: {
+            role: req.user.role,
+            account: { email: req.user.email, username: req.user.username },
+            access_token: req.token
+        }
+    })
+}
+module.exports = { readFunc, updateFunc, deleteFunc, createFunc, getUserAccount }
