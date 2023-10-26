@@ -48,6 +48,11 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
+      groupId: 1,
+      roleId: 10,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       groupId: 2,
       roleId: 1,
       createdAt: new Date(),

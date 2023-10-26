@@ -47,7 +47,12 @@ module.exports = {
       description: 'Assign roles to group',
       createdAt: new Date(),
       updatedAt: new Date()
-    },]);
+    }, {
+      url: '/role/read',
+      description: 'Read Role',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }]);
   },
 
   down: async (queryInterface, Sequelize) => {
