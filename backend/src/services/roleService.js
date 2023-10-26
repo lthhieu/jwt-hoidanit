@@ -3,10 +3,6 @@ const _ = require('lodash');
 const createFunc = async (data) => {
     try {
         let roles = await db.Role.findAll({ attributes: ['url'], raw: true })
-        const array2 = [
-            { url: '/user/read' },
-            { url: '/user/create' }
-        ];
 
         // Sử dụng lodash differenceBy để loại bỏ phần tử trùng
         const resultArray = _.differenceBy(data, roles, 'url');
@@ -112,6 +108,45 @@ const deleteRole = async (id) => {
         }
     }
 }
+const readByGroupid = async (id) => {
+    try {
+        let roles = await db.Group.findOne({
+            attributes: ['name'], where: { id }, include: [{
+                model: db.Role,
+                attributes: ['id', 'url', 'description'],
+                through: { attributes: [] }
+            }]
+        })
+        return {
+            em: "successfully",
+            ec: "0",
+            dt: roles
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            em: "error from service",
+            ec: "1",
+            dt: []
+        }
+    }
+}
+const assignGroupFunc = async (data) => {
+    try {
+        console.log(data)
+        await db.GroupRole.destroy({ where: { groupId: +data.groupId } })
+        await db.GroupRole.bulkCreate(data.data)
+        return { em: "Assign roles to successfully", ec: "0", dt: '' }
+    } catch (e) {
+        console.log(e)
+        return {
+            em: "Cannot assign role",
+            ec: "1",
+            dt: ""
+        }
+    }
+
+}
 module.exports = {
-    createFunc, getAllRoles, getRolesWithPagination, deleteRole
+    createFunc, getAllRoles, getRolesWithPagination, deleteRole, readByGroupid, assignGroupFunc
 }

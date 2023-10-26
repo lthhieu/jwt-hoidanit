@@ -47,8 +47,9 @@ const Login = () => {
         }
     }
     useEffect(() => {
+        console.log(user)
         if (user?.auth) {
-            history.push("/dashboard")
+            history.push("/")
         }
     }, [])
     return (

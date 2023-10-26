@@ -16,7 +16,7 @@ const initApiRoutes = (app) => {
     //group route
     router.get("/group/read", groupController.readFunc)
     //user route
-    router.get("/user/read", checkUserJwt, checkUserPermission, userController.readFunc)
+    router.get("/user/read", userController.readFunc)
     router.post("/user/create", userController.createFunc)
     router.put("/user/update", userController.updateFunc)
     router.delete("/user/delete", userController.deleteFunc)
@@ -25,6 +25,8 @@ const initApiRoutes = (app) => {
     router.post("/role/create", roleController.createFunc)
     router.put("/role/update", roleController.updateFunc)
     router.delete("/role/delete", roleController.deleteFunc)
+    router.get("/role/read-by-groupid", roleController.readByGroupidFunc)
+    router.post("/role/assign-group", roleController.assignGroupFunc)
 
     return app.use("/api/", router)
 }

@@ -6,16 +6,18 @@ const saltRounds = 10
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{
-      email: '1@gmail.com',
-      username: '1',
+      email: 'tran@gmail.com',
+      username: 'Tran',
       phone: '1',
+      groupId: 1,
       password: bcrypt.hashSync('password', saltRounds),
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
-      email: '2@gmail.com',
-      username: '2',
+      email: 'quyen@gmail.com',
+      username: 'Quyen',
       phone: '2',
+      groupId: 1,
       password: bcrypt.hashSync('password', saltRounds),
       createdAt: new Date(),
       updatedAt: new Date()

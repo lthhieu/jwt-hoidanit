@@ -2,6 +2,7 @@ import React from 'react';
 import Login from "../components/login/Login";
 import Register from "../components/register/Register";
 import Dashboard from "../components/dashboard/Dashboard";
+import GroupRole from '../components/group-role/GroupRole';
 import Home from '../components/home/Home';
 import {
     Switch,
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             <Switch>
                 <PrivateRoutes path="/dashboard" component={Dashboard} />
                 <PrivateRoutes path="/role" component={Role} />
+                <PrivateRoutes path="/group-role" component={GroupRole} />
                 <PrivateRoutes path="/project" component={Project} />
 
                 <Route path="/login">

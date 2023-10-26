@@ -84,4 +84,46 @@ const readFunc = async (req, res) => {
         })
     }
 }
-module.exports = { readFunc, updateFunc, deleteFunc, createFunc }
+const readByGroupidFunc = async (req, res) => {
+    try {
+        if (req?.query?.groupid) {
+            let { groupid } = req?.query
+            let result = await roleService.readByGroupid(+groupid)
+            return res.status(200).json({
+                em: result.em,
+                ec: result.ec,
+                dt: result.dt
+            })
+        }
+        return res.status(200).json({
+            em: "No groupid",
+            ec: "-1",
+            dt: ""
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            em: "Error from server",
+            ec: "-1",
+            dt: ""
+        })
+    }
+}
+const assignGroupFunc = async (req, res) => {
+    try {
+        let response = await roleService.assignGroupFunc(req.body)
+        return res.status(200).json({
+            em: response.em,
+            ec: response.ec,
+            dt: response.dt
+        })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            em: "Error from server",
+            ec: "-1",
+            dt: ""
+        })
+    }
+}
+module.exports = { readFunc, updateFunc, deleteFunc, createFunc, readByGroupidFunc, assignGroupFunc }

@@ -27,10 +27,10 @@ const UserProvider = ({ children }) => {
         }
     }
     useEffect(() => {
-        const nonSecurePaths = ['/', '/login', '/register', '/logout']
-        if (!nonSecurePaths.includes(window.location.pathname))
-            fetchUser()
-        else setUser({ ...user, loading: false })
+        // const nonSecurePaths = ['/', '/login', '/register', '/logout']
+        // if (!nonSecurePaths.includes(window.location.pathname))
+        fetchUser()
+        // else setUser({ ...user, loading: false })
     }, [])
 
     return (
