@@ -18,5 +18,8 @@ const fetchAllRolesByGroupidService = (groupid) => {
 const assignRoleToGroup = (data) => {
     return axios.post("/role/assign-group", data)
 }
+const updateRole = (data) => {
+    return axios.put("/role/update", data)
+}
 
-export { createRoles, fetchRoles, deleteRole, fetchAllRolesService, fetchAllRolesByGroupidService, assignRoleToGroup }
+export { createRoles, fetchRoles, deleteRole, fetchAllRolesService, fetchAllRolesByGroupidService, assignRoleToGroup, updateRole }

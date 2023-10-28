@@ -4,6 +4,7 @@ import Register from "../components/register/Register";
 import Dashboard from "../components/dashboard/Dashboard";
 import GroupRole from '../components/group-role/GroupRole';
 import Home from '../components/home/Home';
+import Project from '../components/project/Project';
 import {
     Switch,
     Route
@@ -11,9 +12,7 @@ import {
 import PrivateRoutes from './PrivateRoutes';
 import Role from '../components/role/Role';
 const AppRoutes = () => {
-    const Project = () => {
-        return (<>project</>)
-    }
+
     return (
         <div>
             <Switch>

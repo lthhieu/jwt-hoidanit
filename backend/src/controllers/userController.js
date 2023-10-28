@@ -1,4 +1,5 @@
 import userApiService from '../services/userApiService'
+import apiService from '../services/apiService'
 const readFunc = async (req, res) => {
     try {
         if (req?.query?.page && req?.query?.limit) {
@@ -28,7 +29,21 @@ const readFunc = async (req, res) => {
 }
 const updateFunc = async (req, res) => {
     try {
-
+        let { id } = req?.body
+        if (id) {
+            let result = await userApiService.updateFuncService(req.body)
+            return res.status(200).json({
+                em: result.em,
+                ec: result.ec,
+                dt: result.dt
+            })
+        } else {
+            return res.status(200).json({
+                em: "No any ID",
+                ec: "1",
+                dt: ""
+            })
+        }
 
     } catch (e) {
         console.log(e)
@@ -42,6 +57,13 @@ const updateFunc = async (req, res) => {
 const deleteFunc = async (req, res) => {
     try {
         let { id } = req?.body
+        if (req?.user?.role?.id === id) {
+            return res.status(200).json({
+                em: "Cannot delete yourself",
+                ec: "1",
+                dt: ""
+            })
+        }
         if (id) {
             let result = await userApiService.deleteUser(id)
             return res.status(200).json({
@@ -75,7 +97,7 @@ const createFunc = async (req, res) => {
                 dt: ""
             })
         }
-        let result = await userApiService.createNewUser({ email, username, password, phone, address, sex, groupId: req?.body?.groupId || 4 })
+        let result = await apiService.Register({ email, username, password, phone, address, sex, groupId: req?.body?.groupId || 4 })
         return res.status(200).json({
             em: result.em,
             ec: result.ec,

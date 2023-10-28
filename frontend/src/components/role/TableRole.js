@@ -3,10 +3,11 @@ import { fetchRoles, deleteRole } from '../../services/roleService'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 import ReactPaginate from 'react-paginate';
+import ModelRole from './ModelRole';
 const TableRole = forwardRef((props, ref) => {
     const [roles, setRoles] = useState([])
     const [page, setPage] = useState(1)
-    const [limit, setLimit] = useState(2)
+    const [limit, setLimit] = useState(3)
     const [totalPages, setTotalPages] = useState(0)
     const [totalRows, setTotalRows] = useState(0)
     const [startingtRow, setStartingRow] = useState(0)
@@ -50,16 +51,26 @@ const TableRole = forwardRef((props, ref) => {
                 if (+respone?.ec === 0) {
                     toast.success(respone?.em)
                     await fetchAllRoles()
+                } else {
+                    toast.warning(respone?.em)
                 }
             }
         })
     }
+    const handleUpdateRole = (role) => {
+        setShow(true)
+        setRoleData(role)
+    }
+    const [roleData, setRoleData] = useState({})
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
     return (<><hr />
+        <ModelRole fetchAllRoles={fetchAllRoles} roleData={roleData} show={show} handleClose={handleClose} />
         <div className='d-flex gap-2 gap-md-4 flex-column flex-md-row'><h3>Roles Table</h3>
             <div className='d-flex gap-2 align-items-center col-6 col-md-3'>
                 <span>Show</span>
                 <select name='limit' value={limit} onChange={(e) => handleSetLimit(e)} className="form-select">
-                    <option value={2}>2</option>
+                    <option value={3}>3</option>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                 </select>
@@ -80,12 +91,12 @@ const TableRole = forwardRef((props, ref) => {
                     {roles?.length > 0 ? <>
                         {roles.map((item, index) => {
                             return (<tr key={`row-${index}`}>
-                                <th>{index + 1}</th>
+                                <th>{(page - 1) * limit + index + 1}</th>
                                 <td>{item.url}</td>
                                 <td>{item.description}</td>
                                 <td>{item?.Groups?.length > 0 ? item?.Groups.map(item => item.name).join(', ') : ''}</td>
                                 <td className='d-flex gap-4'>
-                                    <i role='button' className="fa fa-pencil fa-2x text-warning" aria-hidden="true"></i>
+                                    <i onClick={() => handleUpdateRole(item)} role='button' className="fa fa-pencil fa-2x text-warning" aria-hidden="true"></i>
                                     <i onClick={() => handleDeleteRole(item.id)} role='button' className="fa fa-eraser fa-2x text-danger" aria-hidden="true"></i>
                                 </td>
                             </tr>)

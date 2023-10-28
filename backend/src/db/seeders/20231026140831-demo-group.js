@@ -9,7 +9,7 @@ module.exports = {
       updatedAt: new Date()
     }, {
       name: 'Leader',
-      description: 'Manager',
+      description: 'Leader',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {

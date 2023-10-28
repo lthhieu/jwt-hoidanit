@@ -35,10 +35,11 @@ const getUsersWithPagination = async (page, limit) => {
         let startingRow = (page - 1) * limit + 1
 
         let { count, rows } = await db.User.findAndCountAll({
-            attributes: ["id", "username", "email", "phone", "sex"],
+            attributes: ["id", "username", "email", "phone", "sex", "address", "groupId"],
             include: { model: db.Group, attributes: ["name", "description"] },
             limit,
-            offset
+            offset,
+            order: [['id', 'DESC']]
         })
 
         let data = {
@@ -62,31 +63,9 @@ const getUsersWithPagination = async (page, limit) => {
         }
     }
 }
-const updateUser = async (data) => {
-    try {
-        let { id, username, sex, phone, address } = data
-        //update
-        await db.User.update({ username, sex, phone, address }, { where: { id } })
-    } catch (e) {
-        console.log(e)
-        return {
-            em: "fail",
-            ec: "1",
-            dt: []
-        }
-    }
-
-}
 const createNewUser = async (data) => {
     try {
-        let { email, username, password, phone, address, sex, groupId } = data
-        //check existed email or phone
-        if (await checkExistedEmailOrPhone(email, phone)) return { em: "Email or phone is existed", ec: "1" }
-        //hash password
-        let hash = await hashPassword(password)
-        //create new user
-        await db.User.create({ email, username, password: hash, phone, address, sex, groupId });
-        return { em: "Create user successfully", ec: "0", dt: '' }
+        // xem route /register
     } catch (e) {
         console.log(e)
         return { em: "Error from service", ec: "-2", dt: '' }
@@ -109,6 +88,25 @@ const deleteUser = async (id) => {
         }
     }
 }
+const updateFuncService = async (data) => {
+    try {
+        let { id, username, sex, groupId, address } = data
+        //update
+        await db.User.update({ username, sex, address, groupId }, { where: { id } })
+        return {
+            em: "Update successfully",
+            ec: "0",
+            dt: []
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            em: "fail",
+            ec: "1",
+            dt: []
+        }
+    }
+}
 module.exports = {
-    getAllUsers, updateUser, createNewUser, deleteUser, getUsersWithPagination
+    getAllUsers, createNewUser, deleteUser, getUsersWithPagination, updateFuncService
 }

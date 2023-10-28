@@ -29,7 +29,6 @@ const handleRegister = async (req, res) => {
             dt: ""
         })
     }
-
 }
 const handleLogin = async (req, res) => {
     try {

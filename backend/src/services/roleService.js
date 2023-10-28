@@ -66,6 +66,7 @@ const getRolesWithPagination = async (page, limit) => {
                 attributes: ['name', 'description'],
                 through: { attributes: [] }
             }],
+            distinct: true,
             limit,
             offset
         })
@@ -133,7 +134,6 @@ const readByGroupid = async (id) => {
 }
 const assignGroupFunc = async (data) => {
     try {
-        console.log(data)
         await db.GroupRole.destroy({ where: { groupId: +data.groupId } })
         await db.GroupRole.bulkCreate(data.data)
         return { em: "Assign roles to successfully", ec: "0", dt: '' }
@@ -145,8 +145,25 @@ const assignGroupFunc = async (data) => {
             dt: ""
         }
     }
-
+}
+const updateFunc = async (data) => {
+    try {
+        let { id, url, description } = data
+        if (id <= 11) {
+            await db.Role.update({ description }, { where: { id } })
+        } else {
+            await db.Role.update({ url, description }, { where: { id } })
+        }
+        return { em: "Update role successfully", ec: "0", dt: '' }
+    } catch (e) {
+        console.log(e)
+        return {
+            em: "Cannot update role",
+            ec: "1",
+            dt: ""
+        }
+    }
 }
 module.exports = {
-    createFunc, getAllRoles, getRolesWithPagination, deleteRole, readByGroupid, assignGroupFunc
+    createFunc, getAllRoles, getRolesWithPagination, deleteRole, readByGroupid, assignGroupFunc, updateFunc
 }

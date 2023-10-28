@@ -53,23 +53,53 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
+      groupId: 1,
+      roleId: 11,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       groupId: 2,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       groupId: 2,
-      roleId: 2,
+      roleId: 5,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       groupId: 2,
-      roleId: 3,
+      roleId: 7,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       groupId: 2,
-      roleId: 4,
+      roleId: 8,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 2,
+      roleId: 9,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 2,
+      roleId: 10,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 2,
+      roleId: 11,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 3,
+      roleId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 3,
+      roleId: 5,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -79,20 +109,20 @@ module.exports = {
       updatedAt: new Date()
     }, {
       groupId: 3,
-      roleId: 7,
+      roleId: 10,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
-      groupId: 3,
-      roleId: 6,
+      groupId: 4,
+      roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
-      groupId: 3,
+      groupId: 4,
       roleId: 5,
       createdAt: new Date(),
       updatedAt: new Date()
-    },]);
+    }]);
   },
 
   down: async (queryInterface, Sequelize) => {

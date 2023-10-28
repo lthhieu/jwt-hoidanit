@@ -1,7 +1,12 @@
 import roleService from '../services/roleService'
 const updateFunc = async (req, res) => {
     try {
-
+        let response = await roleService.updateFunc(req.body)
+        return res.status(200).json({
+            em: response.em,
+            ec: response.ec,
+            dt: response.dt
+        })
 
     } catch (e) {
         console.log(e)
@@ -33,6 +38,13 @@ const deleteFunc = async (req, res) => {
     try {
         let { id } = req?.body
         if (id) {
+            if (id <= 10) {
+                return res.status(200).json({
+                    em: "Cannot delete default role",
+                    ec: "1",
+                    dt: ""
+                })
+            }
             let result = await roleService.deleteRole(id)
             return res.status(200).json({
                 em: result.em,

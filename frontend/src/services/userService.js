@@ -2,6 +2,9 @@ import axios from '../setup/axios'
 const register = (data) => {
     return axios.post("/register", data)
 }
+const createUser = (data) => {
+    return axios.post("/user/create", data)
+}
 const login = (data) => {
     return axios.post("/login", data)
 }
@@ -17,4 +20,7 @@ const deleteUser = (id) => {
 const getUserAccount = () => {
     return axios.get('/account')
 }
-export { register, login, fetchUsers, deleteUser, getUserAccount, logOut }
+const updateUser = (data) => {
+    return axios.put('/user/update', data)
+}
+export { register, login, fetchUsers, deleteUser, getUserAccount, logOut, updateUser, createUser }

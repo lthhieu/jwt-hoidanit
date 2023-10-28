@@ -52,6 +52,11 @@ module.exports = {
       description: 'Read Role',
       createdAt: new Date(),
       updatedAt: new Date()
+    }, {
+      url: '/role/update',
+      description: 'Update Role',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }]);
   },
 
