@@ -47,7 +47,6 @@ const Login = () => {
         }
     }
     useEffect(() => {
-        console.log(user)
         if (user?.auth) {
             history.push("/")
         }

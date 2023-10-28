@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Register.scss';
 import { useHistory } from "react-router-dom";
 import { register } from '../../services/userService';
 import { toast } from 'react-toastify';
+import { UserContext } from '../../context/UserContext'
 const Register = () => {
     const defaultData = {
         email: '',
@@ -19,10 +20,14 @@ const Register = () => {
         validPhone: true,
         validAddress: true
     }
+    let history = useHistory();
     const [formData, setFormData] = useState(defaultData)
     const [validFormData, setValidFormData] = useState(defaultValid)
+    const { user } = useContext(UserContext)
     useEffect(() => {
-        // axios.get("http://localhost:8080/api/test").then(data => console.log(data))
+        if (user?.auth) {
+            history.push("/")
+        }
     }, [])
     const handleInputChange = (event) => {
         let { name, value } = event.target
@@ -31,8 +36,6 @@ const Register = () => {
             [name]: value
         })
     }
-
-    let history = useHistory();
     const handleLoginPage = () => {
         history.push("/login");
     }
