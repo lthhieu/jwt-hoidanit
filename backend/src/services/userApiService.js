@@ -71,8 +71,16 @@ const createNewUser = async (data) => {
         return { em: "Error from service", ec: "-2", dt: '' }
     }
 }
-const deleteUser = async (id) => {
+const deleteUser = async (id, email) => {
     try {
+        let user = await db.User.findOne({ where: { email }, raw: true })
+        if (id === user?.id) {
+            return {
+                em: "Cannot delete yourself",
+                ec: "1",
+                dt: []
+            }
+        }
         await db.User.destroy({ where: { id } })
         return {
             em: "Delete successfully",

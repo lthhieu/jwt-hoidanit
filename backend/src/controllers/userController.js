@@ -57,15 +57,9 @@ const updateFunc = async (req, res) => {
 const deleteFunc = async (req, res) => {
     try {
         let { id } = req?.body
-        if (req?.user?.role?.id === id) {
-            return res.status(200).json({
-                em: "Cannot delete yourself",
-                ec: "1",
-                dt: ""
-            })
-        }
+        let { email } = req?.user
         if (id) {
-            let result = await userApiService.deleteUser(id)
+            let result = await userApiService.deleteUser(id, email)
             return res.status(200).json({
                 em: result.em,
                 ec: result.ec,
