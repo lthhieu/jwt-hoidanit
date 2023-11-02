@@ -86,7 +86,6 @@ const readFunc = async (req, res) => {
                 dt: result.dt
             })
         }
-
     } catch (e) {
         console.log(e)
         return res.status(500).json({
