@@ -38,7 +38,7 @@ const deleteFunc = async (req, res) => {
     try {
         let { id } = req?.body
         if (id) {
-            if (id <= 10) {
+            if (id <= 11) {
                 return res.status(200).json({
                     em: "Cannot delete default role",
                     ec: "1",
