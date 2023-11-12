@@ -1,11 +1,11 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
-import { fetchRoles, deleteRole } from '../../services/roleService'
+import { fetchProjects, deleteProject } from '../../services/projectService'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 import ReactPaginate from 'react-paginate';
-import ModelRole from './ModalRole';
-const TableRole = forwardRef((props, ref) => {
-    const [roles, setRoles] = useState([])
+import ModalProject from './ModalProject';
+const TableProject = forwardRef((props, ref) => {
+    const [projects, setProjects] = useState([])
     const [page, setPage] = useState(1)
     const [limit, setLimit] = useState(3)
     const [totalPages, setTotalPages] = useState(0)
@@ -13,18 +13,18 @@ const TableRole = forwardRef((props, ref) => {
     const [startingRow, setStartingRow] = useState(0)
     const [endingRow, setEndingRow] = useState(0)
     useEffect(() => {
-        fetchAllRoles()
+        fetchAllProjects()
     }, [page, limit])
     useImperativeHandle(ref, () => ({
-        fetchAllRolesAgain() {
-            fetchAllRoles()
+        fetchAllProjectsAgain() {
+            fetchAllProjects()
         }
 
     }));
-    const fetchAllRoles = async () => {
-        let response = await fetchRoles(page, limit)
+    const fetchAllProjects = async () => {
+        let response = await fetchProjects(page, limit)
         if (+response?.ec === 0) {
-            setRoles(response?.dt?.roles)
+            setProjects(response?.dt?.projects)
             setTotalPages(response?.dt?.totalPages)
             setTotalRows(response?.dt?.totalRows)
             setStartingRow(response?.dt?.startingRow)
@@ -38,7 +38,7 @@ const TableRole = forwardRef((props, ref) => {
         setLimit(e.target.value)
         setPage(1)
     }
-    const handleDeleteRole = async (id) => {
+    const handleDeleteProject = async (id) => {
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -47,26 +47,26 @@ const TableRole = forwardRef((props, ref) => {
             showCloseButton: true
         }).then(async (result) => {
             if (result.isConfirmed) {
-                let response = await deleteRole(id)
+                let response = await deleteProject(id)
                 if (+response?.ec === 0) {
                     toast.success(response?.em)
-                    await fetchAllRoles()
+                    await fetchAllProjects()
                 } else {
                     toast.warning(response?.em)
                 }
             }
         })
     }
-    const handleUpdateRole = (role) => {
+    const handleUpdateProject = (role) => {
         setShow(true)
-        setRoleData(role)
+        setProjectData(role)
     }
-    const [roleData, setRoleData] = useState({})
+    const [projectData, setProjectData] = useState({})
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     return (<><hr />
-        <ModelRole fetchAllRoles={fetchAllRoles} roleData={roleData} show={show} handleClose={handleClose} />
-        <div className='d-flex gap-2 gap-md-4 flex-column flex-md-row'><h3>Roles Table</h3>
+        <ModalProject fetchAllProjects={fetchAllProjects} projectData={projectData} show={show} handleClose={handleClose} />
+        <div className='d-flex gap-2 gap-md-4 flex-column flex-md-row'><h3>Project Table</h3>
             <div className='d-flex gap-2 align-items-center col-6 col-md-3'>
                 <span>Show</span>
                 <select name='limit' value={limit} onChange={(e) => handleSetLimit(e)} className="form-select">
@@ -81,27 +81,26 @@ const TableRole = forwardRef((props, ref) => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Url</th>
+                        <th>Name</th>
                         <th>Description</th>
-                        <th>Group</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {roles?.length > 0 ? <>
-                        {roles.map((item, index) => {
+                    {projects?.length > 0 ? <>
+                        {projects.map((item, index) => {
                             return (<tr key={`row-${index}`}>
                                 <th>{(page - 1) * limit + index + 1}</th>
-                                <td>{item.url}</td>
+                                <td>{item.name}</td>
                                 <td>{item.description}</td>
-                                <td>{item?.Groups?.length > 0 ? item?.Groups.map(item => item.name).join(', ') : ''}</td>
+
                                 <td className='d-flex gap-4'>
-                                    <i onClick={() => handleUpdateRole(item)} role='button' className="fa fa-pencil fa-2x text-warning" aria-hidden="true"></i>
-                                    <i onClick={() => handleDeleteRole(item.id)} role='button' className="fa fa-eraser fa-2x text-danger" aria-hidden="true"></i>
+                                    <i onClick={() => handleUpdateProject(item)} role='button' className="fa fa-pencil fa-2x text-warning" aria-hidden="true"></i>
+                                    <i onClick={() => handleDeleteProject(item.id)} role='button' className="fa fa-eraser fa-2x text-danger" aria-hidden="true"></i>
                                 </td>
                             </tr>)
                         })}
-                    </> : <><tr><td>No any roles</td></tr></>}
+                    </> : <><tr><td>No any projects</td></tr></>}
                 </tbody>
             </table>
         </div>
@@ -138,4 +137,4 @@ const TableRole = forwardRef((props, ref) => {
     );
 })
 
-export default TableRole;
+export default TableProject;

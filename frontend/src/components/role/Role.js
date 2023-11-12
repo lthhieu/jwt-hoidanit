@@ -75,7 +75,7 @@ const Role = () => {
                                 </div>
                                 <div className="form-group col-12 col-md-5 mt-3 mt-md-0">
                                     <label>Description</label>
-                                    <input onChange={(e) => { handleOnChangeInput('description', e.target.value, key) }} value={child.description} type="text" className="form-control" placeholder="Enter desciption" />
+                                    <input onChange={(e) => { handleOnChangeInput('description', e.target.value, key) }} value={child.description} type="text" className="form-control" placeholder="Enter description" />
                                 </div>
                                 <div className='col-12 col-md-2 mt-2 mt-md-0 d-flex align-items-md-end gap-3'>
                                     <i onClick={() => handleAddNewInput()} role="button" className="text-success fa-2x fa fa-plus-square-o" aria-hidden="true"></i>

@@ -57,6 +57,26 @@ module.exports = {
       description: 'Update Role',
       createdAt: new Date(),
       updatedAt: new Date()
+    }, {
+      url: '/project/read',
+      description: 'Read projects',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      url: '/project/create',
+      description: 'Create projects',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      url: '/project/update',
+      description: 'Update projects',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      url: '/project/delete',
+      description: 'Delete projects',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }]);
   },
 

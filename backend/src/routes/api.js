@@ -3,6 +3,7 @@ import apiController from "../controllers/apiController"
 import userController from '../controllers/userController'
 import groupController from '../controllers/groupController'
 import roleController from '../controllers/roleController'
+import projectController from '../controllers/projectController'
 import { checkUserJwt, checkUserPermission } from '../middlewares/jwtFunc'
 const router = express.Router();
 const initApiRoutes = (app) => {
@@ -28,6 +29,11 @@ const initApiRoutes = (app) => {
     router.get("/role/read-by-groupid", roleController.readByGroupidFunc)
     router.post("/role/assign-group", roleController.assignGroupFunc)
 
+    //project
+    router.get("/project/read", projectController.readFunc)
+    router.post("/project/create", projectController.createFunc)
+    router.put("/project/update", projectController.updateFunc)
+    router.delete("/project/delete", projectController.deleteFunc)
     return app.use("/api/", router)
 }
 export default initApiRoutes

@@ -58,6 +58,26 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
+      groupId: 1,
+      roleId: 12,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 1,
+      roleId: 13,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 1,
+      roleId: 14,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 1,
+      roleId: 15,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       groupId: 2,
       roleId: 1,
       createdAt: new Date(),
@@ -93,6 +113,11 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
+      groupId: 2,
+      roleId: 12,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       groupId: 3,
       roleId: 1,
       createdAt: new Date(),
@@ -113,6 +138,11 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
+      groupId: 3,
+      roleId: 12,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       groupId: 4,
       roleId: 1,
       createdAt: new Date(),
@@ -120,6 +150,27 @@ module.exports = {
     }, {
       groupId: 4,
       roleId: 5,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+      , {
+      groupId: 4,
+      roleId: 8,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 4,
+      roleId: 10,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 4,
+      roleId: 12,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      groupId: 4,
+      roleId: 13,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

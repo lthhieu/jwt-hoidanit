@@ -50,11 +50,11 @@ const Login = async (data) => {
             //check password
             if (await comparePassword(password, user.password)) {
                 let role = await getGroupWithRoles(user)
-                let token = createJwt({ email: user.email, role, username: user.username })
+                let token = createJwt({ email: user.email, role, username: user.username, id: user.id })
 
                 return {
                     em: "successfully", ec: "0", dt: {
-                        access_token: token, role, account: { email: user.email, username: user.username }
+                        access_token: token, role, account: { email: user.email, username: user.username, id: user.id }
                     }
                 }
             } else return { em: "Password is not correct", ec: "1" }

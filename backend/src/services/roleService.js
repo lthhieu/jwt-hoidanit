@@ -149,7 +149,7 @@ const assignGroupFunc = async (data) => {
 const updateFunc = async (data) => {
     try {
         let { id, url, description } = data
-        if (id <= 11) {
+        if (id <= 15) {
             await db.Role.update({ description }, { where: { id } })
         } else {
             await db.Role.update({ url, description }, { where: { id } })
